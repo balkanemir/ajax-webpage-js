@@ -1,0 +1,268 @@
+body {
+    background-color: #A90015;
+    font-size: 16px;
+    color: #fff;
+    font-family: 'Oxygen', sans-serif;
+}
+
+/** HEADER **/
+header {
+    background-color: #F2F5FA;
+}
+
+#logo-img {
+    background: #A90015;
+    width: 315px;
+    height: 134px;
+    margin: 10px 15px 10px 0px;
+    border-radius: 5px;
+}
+
+.navbar-brand {
+    padding-top: 25px;
+}
+
+.navbar-brand h1 {
+    /* Company Name */
+    font-family: 'Oxanium', cursive;
+    color: #A90015;
+    font-size: 48px;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #000;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    line-height: .75;
+}
+
+.navbar-brand a {
+    text-decoration: none;
+}
+
+.navbar-brand p {
+    /* Company Description */
+    color: #000;
+    text-transform: uppercase;
+    font-size: .7em;
+    margin-top: 15px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    /* Navigation buttons */
+    color: #000;
+    fill: #000;
+    transition: none;
+    text-align: center;
+    margin-left: 20px;
+    border-radius: 5px;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: #000;
+    fill: #000;
+    transition: none;
+    text-align: center;
+    background-color: #ced2dc;
+}
+
+.navbar-light .navbar-nav .nav-link:active {
+    background-color: #A90015;
+    color: #fff;
+    fill: #fff;
+    transition: none;
+    text-align: center;
+}
+
+.navbar-light .navbar-toggler {
+    /* Collapsed button */
+    border-color: rgba(0, 0, 0, .55);
+    color: #A90015;
+    border: 2px solid #A90015;
+    border-radius: 5px;
+}
+
+/* END HEADER */
+
+/* FOOTER */
+.card-footer {
+    margin-top: 30px;
+    padding-top: 35px;
+    padding-bottom: 30px;
+    background-color: #222;
+    border-top: 0;
+}
+
+.card-footer div.row {
+    margin-bottom: 35px;
+}
+
+#hours > span, #address > span {
+    font-size: 20px;
+}
+
+#testimonials {
+    font-style: italic;
+}
+
+#testimonials p {
+    margin-top: 25px;
+}
+
+#testimonials p:first-child {
+    margin-top: 0;
+}
+/* END FOOTER */
+
+/* HOME PAGE */
+.container .jumbotron {
+    border: 2px solid #ced2dc;
+    box-shadow: 0 0 5px #fff;
+    margin-top: 20px;
+}
+
+#pesticide-tile, #seed-tile, #map-tile {
+    height: 250px;
+    width: 100%;
+    margin-bottom: 15px;
+    position: relative;
+    border: 2px solid #3F0C1F;
+    overflow: hidden;
+}
+
+#pesticide-tile:hover, #seed-tile:hover, #map-tile:hover {
+    box-shadow: 0 1px 5px 1px #cccccc;
+}
+
+#pesticide-tile {
+    background: url('../images/pesticide.jpg') no-repeat;
+    background-position: center;
+}
+
+#seed-tile {
+    background: url('../images/seed.jpg') no-repeat;
+    background-position: center;
+}
+
+#pesticide-tile span, #seed-tile span, #map-tile span {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    background-color: #000;
+    color: #fff;
+    opacity: 0.8;
+}
+/* END HOME PAGE */
+
+/************ Large devices only ************/
+@media (min-width: 1200px) {
+    /* Home Page */
+    .container .jumbotron {
+        background: url('../images/iremtarım.png') no-repeat;
+        height: 675px;
+        margin-bottom: 20px;
+    }
+    /* End Home Page */
+}
+
+/************ Medium devices only ************/
+@media (min-width: 992px) and (max-width: 1199px) {
+    /* Home Page */
+    .container .jumbotron {
+        background: url('../images/iremtarım.png') no-repeat;
+        height: 558px;
+        margin-bottom: 20px;
+    }
+    /* End Home Page */
+
+}
+
+/************ Small devices only ************/
+@media (min-width: 768px) and (max-width: 991px) {
+    /* Header */
+    #logo-img {
+        background: #A90015;
+        width: 215px;
+        height: 84px;
+        margin: 10px 15px 10px 0px;
+        border-radius: 500px;
+    }
+    /* End Header */
+
+    /* Home Page */
+    .container .jumbotron {
+        background: url('../images/iremtarım.png') no-repeat;
+        height: 432px;
+        margin-bottom: 20px;
+    }
+    /* End Home Page */
+}
+
+/************ Extra small devices only ************/
+@media (min-width: 575px) and (max-width: 767px) {
+    /* Header */
+    .navbar-brand h1 {
+        font-size: 36px;
+    }
+
+    .navbar-brand p {
+        font-size: 10px;
+    }
+    /* End Header */
+
+    /* Home Page */
+    .container .jumbotron {
+        background: url('../images/iremtarım.png') no-repeat;
+        height: 400px;
+        margin-bottom: 20px;
+    }
+
+    #pesticide-tile, #seed-tile {
+        width: 250px;
+        margin: 0 auto 15px;
+    }
+    /* End Home Page */
+}
+
+/************ Super small devices only ************/
+@media (max-width: 574px){
+    /* Header */
+    .navbar-brand h1 {
+        font-size: 36px;
+    }
+
+    .navbar-brand p {
+        font-size: 10px;
+    }
+    /* End Header */
+
+    /* Footer */
+    .card-footer section {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    
+    .card-footer section:nth-child(3) {
+        margin-bottom: 0;
+    }
+
+    .card-footer section hr {
+        width: 50%;
+        margin: 30px auto 0;
+    }
+    /* End Footer */
+
+    /* Home Page */
+    .container .jumbotron {
+        background: url('../images/iremtarım.png') no-repeat;
+        margin-bottom: 20px;
+    }
+
+    #pesticide-tile, #seed-tile, #map-tile {
+        width: 250px;
+        margin: 0 auto 15px;
+    }
+    /* End Home Page */
+}
