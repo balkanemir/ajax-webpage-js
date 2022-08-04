@@ -72,6 +72,15 @@ header {
     text-align: center;
 }
 
+.navbar-light .navbar-nav .nav-link.active {
+  background-color: #A90015;
+  color: #fff;
+  fill: #fff;
+  transition: none;
+  text-align: center;
+  border: 1px solid #fff;
+}
+
 .navbar-light .navbar-toggler {
     /* Collapsed button */
     border-color: rgba(0, 0, 0, .55);
@@ -79,7 +88,6 @@ header {
     border: 2px solid #A90015;
     border-radius: 5px;
 }
-
 /* END HEADER */
 
 /* FOOTER */
@@ -96,7 +104,7 @@ header {
 }
 
 #hours > span, #address > span {
-    font-size: 20px;
+    font-size: 18px;
 }
 
 #testimonials {
@@ -156,6 +164,82 @@ header {
 }
 /* END HOME PAGE */
 
+/* PESTICIDES PAGE */
+#pesticides-title {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.category-tile {
+  position: relative;
+  border: 2px solid #3F0C1F;
+  overflow: hidden;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 15px;
+  border-radius: 5px;
+}
+
+.category-tile span {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  text-transform: uppercase;
+  background-color: #000;
+  color: #fff;
+  opacity: .8;
+}
+
+.category-tile:hover {
+  box-shadow: 0 1px 5px 1px #cccccc;
+}
+/* END PESTICIDES PAGE */
+
+/* SINGLE CATEGORY PESTICIDES PAGE */
+#single-category-pesticides-title {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.pesticide-item-tile {
+  margin-bottom: 25px;
+}
+
+.pesticide-item-tile hr {
+  width: 80%;
+  margin: 0 auto 0;
+}
+
+.pesticide-item-photo {
+  position: relative;
+  border: 2px solid #3F0C1F;
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 0;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 20px;
+  max-width: 250px;
+}
+
+.pesticide-item-description {
+  padding-right: 30px;
+}
+
+h3.pesticide-item-title {
+  margin: 0 0 10px;
+}
+
+.pesticide-item-details {
+  font-size: .9em;
+  font-style: italic;
+}
+/* END SINGLE CATEGORY PESTICIDES PAGE */
+
+
 /************ Large devices only ************/
 @media (min-width: 1200px) {
     /* Home Page */
@@ -189,6 +273,11 @@ header {
         margin: 10px 15px 10px 0px;
         border-radius: 500px;
     }
+
+    .navbar-light .navbar-nav .nav-link {
+      /* Navigation buttons */  
+      margin-left: 0;
+    }
     /* End Header */
 
     /* Home Page */
@@ -210,6 +299,11 @@ header {
     .navbar-brand p {
         font-size: 10px;
     }
+
+    .navbar-light .navbar-nav .nav-link {
+      /* Navigation buttons */  
+      margin-left: 0;
+    }
     /* End Header */
 
     /* Home Page */
@@ -224,6 +318,12 @@ header {
         margin: 0 auto 15px;
     }
     /* End Home Page */
+
+    /* Single Category Pesticides Page */
+    .pesticide-item-title {
+      text-align: center;
+    }
+    /* End Single Category Pesticides Page */
 }
 
 /************ Super small devices only ************/
@@ -235,6 +335,11 @@ header {
 
     .navbar-brand p {
         font-size: 10px;
+    }
+
+    .navbar-light .navbar-nav .nav-link {
+      /* Navigation buttons */  
+      margin-left: 0;
     }
     /* End Header */
 
@@ -265,4 +370,10 @@ header {
         margin: 0 auto 15px;
     }
     /* End Home Page */
+
+    /* Single Category Pesticides Page */
+    .pesticide-item-title {
+      text-align: center;
+    }
+    /* End Single Category Pesticides Page */
 }

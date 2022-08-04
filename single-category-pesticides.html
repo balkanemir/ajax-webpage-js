@@ -6,6 +6,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- JavaScript -->
+  <script src="bootstrap/js/script.js"></script>
+
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -50,7 +53,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="pesticides.html">
+              <a class="nav-link list-group-item disabled active" href="pesticides.html">
                 <div>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="bi bi-box2" viewBox="0 0 16 16">
                     <path
@@ -90,33 +93,78 @@
   </header>
 
   <div id="main-content" class="container">
-    <div class="jumbotron">
-      <!-- Small size image -->
-      <img src="bootstrap/images/iremtarım.png" alt="Dükkan Resmi" class="img-fluid d-block d-sm-none">
-    </div>
-    <div id="home-tiles" class="row">
-      <div class="col-lg-4 col-sm-6 col-xs-12">
-        <a href="pesticides.html">
-          <div id="pesticide-tile"><span>İlaçlarımız</span></div>
-        </a>
-      </div>
-      <div class="col-lg-4 col-sm-6 col-xs-12">
-        <a href="seeds.html">
-          <div id="seed-tile"><span>Tohumlarımız / Fİdelerİmİz</span></div>
-        </a>
-      </div>
-      <div class="col-lg-4 col-sm-12 col-xs-12">
-        <a href="https://goo.gl/maps/f4bZKCGogKDjs9d18" target="_blank">
-          <div id="map-tile">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d783.5643001598571!2d27.97468836874786!3d38.227138680140264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1zQ3VtaHVyaXlldCwgSXJlbSBUYXJpbSwgS2FyxZ_EsXlha2EgQ2FkZGVzaSwgw5ZkZW1pxZ8vxLB6bWly!5e0!3m2!1sen!2str!4v1659475293874!5m2!1sen!2str"
-              width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"></iframe>
-            <span>Harİta</span>
+    <h2 id="single-category-pesticides-title" class="text-center">A ilaçları</h2>
+    <section class="row">
+      <div class="pesticide-item-tile col-lg-6">
+        <div class="row">
+          <div class="col-md-5">
+            <div class="pesticide-item-photo">
+              <img class="img-fluid" width="250px" height="150px" src="./bootstrap/images/pesticides-A/A1.jpg" alt="Item">
+            </div>
           </div>
-        </a>
+          <div class="pesticide-item-description col-md-7">
+            <h3 class="pesticide-item-title">İlaç 1</h3>
+            <p class="pesticide-item-details">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              In eget urna vel nunc lobortis posuere. Ut placerat congue erat fringilla eleifend.
+              Aliquam congue vestibulum lacus, at fringilla sapien suscipit eget. Vestibulum accumsan
+              nisl a nibh volutpat rhoncus. Nulla rutrum tincidunt augue eget vestibulum.</p>
+          </div>
+          <hr class="d-block d-sm-none">
+        </div>
       </div>
-    </div>
+      <div class="pesticide-item-tile col-lg-6">
+        <div class="row">
+          <div class="col-md-5">
+            <div class="pesticide-item-photo">
+              <img class="img-fluid" width="250px" height="150px" src="./bootstrap/images/pesticides-A/A1.jpg" alt="Item">
+            </div>
+          </div>
+          <div class="pesticide-item-description col-md-7">
+            <h3 class="pesticide-item-title">İlaç 2</h3>
+            <p class="pesticide-item-details">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              In eget urna vel nunc lobortis posuere. Ut placerat congue erat fringilla eleifend.
+              Aliquam congue vestibulum lacus, at fringilla sapien suscipit eget. Vestibulum accumsan
+              nisl a nibh volutpat rhoncus. Nulla rutrum tincidunt augue eget vestibulum.</p>
+          </div>
+          <hr class="d-block d-sm-none">
+        </div>
+      </div>
+      <div class="pesticide-item-tile col-lg-6">
+        <div class="row">
+          <div class="col-md-5">
+            <div class="pesticide-item-photo">
+              <img class="img-fluid" width="250px" height="150px" src="./bootstrap/images/pesticides-A/A1.jpg" alt="Item">
+            </div>
+          </div>
+          <div class="pesticide-item-description col-md-7">
+            <h3 class="pesticide-item-title">İlaç 3</h3>
+            <p class="pesticide-item-details">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              In eget urna vel nunc lobortis posuere. Ut placerat congue erat fringilla eleifend.
+              Aliquam congue vestibulum lacus, at fringilla sapien suscipit eget. Vestibulum accumsan
+              nisl a nibh volutpat rhoncus. Nulla rutrum tincidunt augue eget vestibulum.</p>
+          </div>
+          <hr class="d-block d-sm-none">
+        </div>
+      </div>
+      <div class="pesticide-item-tile col-lg-6">
+        <div class="row">
+          <div class="col-md-5">
+            <div class="pesticide-item-photo">
+              <img class="img-fluid" width="250px" height="150px" src="./bootstrap/images/pesticides-A/A1.jpg" alt="Item">
+            </div>
+          </div>
+          <div class="pesticide-item-description col-md-7">
+            <h3 class="pesticide-item-title">İlaç 4</h3>
+            <p class="pesticide-item-details">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              In eget urna vel nunc lobortis posuere. Ut placerat congue erat fringilla eleifend.
+              Aliquam congue vestibulum lacus, at fringilla sapien suscipit eget. Vestibulum accumsan
+              nisl a nibh volutpat rhoncus. Nulla rutrum tincidunt augue eget vestibulum.</p>
+          </div>
+          <hr class="d-block d-sm-none">
+        </div>
+      </div>
+    </section>
+
   </div>
 
   <footer class="card-footer">
