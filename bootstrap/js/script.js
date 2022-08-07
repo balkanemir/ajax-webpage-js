@@ -11,9 +11,15 @@ $(function () {
   var it = {};
 
   var homeHtml = "snippets/home-snippet.html";
-  var allCategoriesUrl = "https://irem-tarim-default-rtdb.firebaseio.com/Categories.json";
+  var allCategoriesUrl =
+    "https://irem-tarim-default-rtdb.firebaseio.com/Categories.json";
   var categoriesTitleHtml = "snippets/pesticides-title-snippet.html";
   var categoryHtml = "snippets/pesticides-snippet.html";
+  var pesticideItemUrl =
+    "https://irem-tarim-default-rtdb.firebaseio.com/Category-items-{{category}}.json";
+  var pesticideItemsTitleHtml =
+    "snippets/single-category-pesticides-title-snippet.html";
+  var pesticideItemHtml = "snippets/single-category-pesticides-snippet.html";
 
   var insertHtml = function (selector, html) {
     var targetElem = document.querySelector(selector);
@@ -22,16 +28,18 @@ $(function () {
 
   var showLoading = function (selector) {
     var html = "<div class='text-center'>";
-    html += "<img width'100px' height='100px' style='margin: 100px' src='bootstrap/images/ajax-loader.gif'></div>";
+    html +=
+      "<img width'100px' height='100px' style='margin: 100px' src='bootstrap/images/ajax-loader.gif'></div>";
     insertHtml(selector, html);
   };
 
   var insertProperty = function (string, propName, propValue) {
     var propToReplace = "{{" + propName + "}}";
-    console.log(propToReplace);
     string = string.replace(new RegExp(propToReplace, "g"), propValue);
     return string;
-  }
+  };
+
+ 
 
   document.addEventListener("DOMContentLoaded", function (event) {
     showLoading("#main-content");
@@ -40,43 +48,124 @@ $(function () {
       function (responseText) {
         document.querySelector("#main-content").innerHTML = responseText;
       },
-      false);
+      false
+    );
   });
+
 
   it.loadPesticideCategories = function () {
     showLoading("#main-content");
     $ajaxUtils.sendGetRequest(allCategoriesUrl, buildAndShowCategoriesHTML);
   };
 
-  function buildAndShowCategoriesHTML (categories) {
+  it.loadPesticideItems = function (category) {
+    showLoading("#main-content");
+    pesticideItemUrl = insertProperty(pesticideItemUrl, "category", category);
+    $ajaxUtils.sendGetRequest(pesticideItemUrl, buildAndShowPesticideItemsHTML);
+  };
+
+  function buildAndShowCategoriesHTML(categories) {
     $ajaxUtils.sendGetRequest(
       categoriesTitleHtml,
       function (categoriesTitleHtml) {
         $ajaxUtils.sendGetRequest(
           categoryHtml,
           function (categoryHtml) {
-            var categoriesViewHtml = buildCategoriesViewHtml(categories, 
-              categoriesTitleHtml,categoryHtml);
-              insertHtml("#main-content", categoriesViewHtml);
-          }, false);
+            var categoriesViewHtml = buildCategoriesViewHtml(
+              categories,
+              categoriesTitleHtml,
+              categoryHtml
+            );
+            insertHtml("#main-content", categoriesViewHtml);
+            window.onpopstate = function (event) {
+              showLoading("#main-content");
+              console.log("popstate in categories runned");
+              insertHtml("#main-content", homeHtml);
+            }
+          },
+          false
+        );
       },
-      false);
+      false
+    );
   }
 
-  function buildCategoriesViewHtml(categories,categoriesTitleHtml, categoryHtml) {
-  var finalHtml = categoriesTitleHtml;
-  finalHtml += "<section class='row'>";
+  function buildAndShowPesticideItemsHTML(categoryPesticideItems) {
+    $ajaxUtils.sendGetRequest(
+      pesticideItemsTitleHtml,
+      function (pesticideItemsTitleHtml) {
+        $ajaxUtils.sendGetRequest(
+          pesticideItemHtml,
+          function (pesticideItemHtml) {
+            var pesticdeItemsViewHtml = buildPesticideItemsViewHtml(
+              categoryPesticideItems,
+              pesticideItemsTitleHtml,
+              pesticideItemHtml
+            );
+            insertHtml("#main-content", pesticdeItemsViewHtml);
+            window.onpopstate = function (event) {
+              showLoading("#main-content");
+              console.log("popstate in item runned");
+              pesticideItemUrl =  "https://irem-tarim-default-rtdb.firebaseio.com/Category-items-{{category}}.json";
+              $it.loadPesticideCategories();
+            }
+          },
+          false
+        );
+      },
+      false
+    );
+  }
 
-  for(var i = 0; i < categories.length; i++) {
-    var html = categoryHtml;
-    var name = "" + categories[i]["name"];
-    var short_name = categories[i]["short_name"]; 
-    html = insertProperty(html, "name", name);
-    html = insertProperty(html, "short_name",short_name);
-    finalHtml += html;
+  function buildCategoriesViewHtml(
+    categories,
+    categoriesTitleHtml,
+    categoryHtml
+  ) {
+    var finalHtml = categoriesTitleHtml;
+    finalHtml += "<section class='row'>";
+
+    for (var i = 0; i < categories.length; i++) {
+      var html = categoryHtml;
+      var name = "" + categories[i]["name"];
+      var short_name = categories[i]["short_name"];
+      html = insertProperty(html, "name", name);
+      html = insertProperty(html, "short_name", short_name);
+      finalHtml += html;
+    }
+    finalHtml += "</section>";
+    return finalHtml;
   }
-  finalHtml += "</section>";
-  return finalHtml;
+
+  function buildPesticideItemsViewHtml(
+    categoryPesticideItems,
+    pesticideItemsTitleHtml,
+    pesticideItemHtml
+  ) {
+    pesticideItemsTitleHtml = insertProperty(
+      pesticideItemsTitleHtml,
+      "category_name",
+      categoryPesticideItems[0]["category_name"]
+    );
+    var finalHtml = pesticideItemsTitleHtml;
+    finalHtml += "<section class='row'>";
+    for (var i = 0; i < categoryPesticideItems.length; i++) {
+      var html = pesticideItemHtml;
+      var name = "" + categoryPesticideItems[i]["name"];
+      var short_name = categoryPesticideItems[i]["short_name"];
+      var category_name = categoryPesticideItems[i]["category_name"];
+      var description = categoryPesticideItems[i]["description"];
+      var category = categoryPesticideItems[i]["category"];
+      html = insertProperty(html, "name", name);
+      html = insertProperty(html, "short_name", short_name);
+      html = insertProperty(html, "category_name", category_name);
+      html = insertProperty(html, "description", description);
+      html = insertProperty(html, "category", category);
+      finalHtml += html;
+    }
+    finalHtml += "</section>";
+    return finalHtml;
   }
+
   global.$it = it;
 })(window);

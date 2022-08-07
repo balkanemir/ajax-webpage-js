@@ -73,12 +73,12 @@ header {
 }
 
 .navbar-light .navbar-nav .nav-link.active {
-  background-color: #A90015;
-  color: #fff;
-  fill: #fff;
-  transition: none;
-  text-align: center;
-  border: 1px solid #fff;
+    background-color: #A90015;
+    color: #fff;
+    fill: #fff;
+    transition: none;
+    text-align: center;
+    border: 1px solid #fff;
 }
 
 .navbar-light .navbar-toggler {
@@ -125,6 +125,7 @@ header {
     border: 2px solid #ced2dc;
     box-shadow: 0 0 5px #fff;
     margin-top: 20px;
+    border-radius: 5px;
 }
 
 #pesticide-tile, #seed-tile, #map-tile {
@@ -134,6 +135,7 @@ header {
     position: relative;
     border: 2px solid #3F0C1F;
     overflow: hidden;
+    border-radius: 5px;
 }
 
 #pesticide-tile:hover, #seed-tile:hover, #map-tile:hover {
@@ -247,6 +249,7 @@ h3.pesticide-item-title {
         background: url('../images/iremtarım.png') no-repeat;
         height: 675px;
         margin-bottom: 20px;
+        border-radius: 5px;
     }
     /* End Home Page */
 }
@@ -285,6 +288,7 @@ h3.pesticide-item-title {
         background: url('../images/iremtarım.png') no-repeat;
         height: 432px;
         margin-bottom: 20px;
+        border-radius: 5px;
     }
     /* End Home Page */
 }
@@ -311,6 +315,7 @@ h3.pesticide-item-title {
         background: url('../images/iremtarım.png') no-repeat;
         height: 400px;
         margin-bottom: 20px;
+        border-radius: 5px;
     }
 
     #pesticide-tile, #seed-tile {
@@ -363,6 +368,7 @@ h3.pesticide-item-title {
     .container .jumbotron {
         background: url('../images/iremtarım.png') no-repeat;
         margin-bottom: 20px;
+        border-radius: 5px;
     }
 
     #pesticide-tile, #seed-tile, #map-tile {
