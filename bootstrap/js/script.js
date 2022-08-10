@@ -39,6 +39,18 @@ $(function () {
     return string;
   };
 
+  var switchNavButtonToActive = function () {
+    var classes = document.querySelector("#navHomeButton").className;
+    classes = classes.replace(new RegExp("list-group-item active", "g"), "");
+    document.querySelector("#navHomeButton").className = classes;
+
+    classes = document.querySelector("#navPesticideButton").className;
+    if (classes.indexOf("active") == -1) {
+      classes += " list-group-item active";
+      document.querySelector("#navPesticideButton").className = classes;
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", function (event) {
     showLoading("#main-content");
     $ajaxUtils.sendGetRequest(
@@ -72,7 +84,6 @@ $(function () {
     );
     window.history.pushState({}, "", "/index");
     setPathName = window.location.pathname;
-    // console.log("I am in load main and window is changed to " + window.location.pathname);
   };
 
   function buildAndShowCategoriesHTML(categories) {
@@ -88,6 +99,7 @@ $(function () {
               categoryHtml
             );
             insertHtml("#main-content", categoriesViewHtml);
+            switchNavButtonToActive();
           },
           false
         );

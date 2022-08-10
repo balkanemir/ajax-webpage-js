@@ -346,6 +346,10 @@ h3.pesticide-item-title {
       /* Navigation buttons */  
       margin-left: 0;
     }
+
+    .d-xs-block {
+        display: block !important;
+    }
     /* End Header */
 
     /* Footer */
