@@ -108,7 +108,6 @@ $(function () {
     );
     window.history.pushState({}, "", "/categories");
     setPathName = window.location.pathname;
-   // console.log("I am in categories load and window is changed to " + window.location.pathname);
   }
 
   function buildAndShowPesticideItemsHTML(categoryPesticideItems) {
@@ -136,21 +135,16 @@ $(function () {
 
   window.addEventListener('popstate', () => {
     if (setPathName === "/categories") {
-      document.getElementById('category').onclick = function () {
-        it.loadPesticideItems();
-        window.history.replaceState(null, '', '/items');
+      if(document.getElementById('category').onclick === null) {
+        console.log("executed");
       };
-      window.history.replaceState(null, '', '/index');
       it.loadMainPage();
+      
     }
     if (setPathName === "/items") {
-      window.history.replaceState(null, '', '/categories');
       pesticideItemUrl =
             "https://irem-tarim-default-rtdb.firebaseio.com/Category-items-{{category}}.json";
-          it.loadPesticideCategories();
-    }
-    if (setPathName === "/index") {
-      window.history.replaceState(null, '', '/index');
+          it.loadPesticideCategories();     
     }
   })
 
@@ -183,6 +177,16 @@ $(function () {
       pesticideItemsTitleHtml,
       "category_name",
       categoryPesticideItems[0]["category_name"]
+    );
+    pesticideItemsTitleHtml = insertProperty(
+      pesticideItemsTitleHtml,
+      "category",
+      categoryPesticideItems[0]["category"]
+    );
+    pesticideItemsTitleHtml = insertProperty(
+      pesticideItemsTitleHtml,
+      "short_name",
+      categoryPesticideItems[0]["short_name"]
     );
     var finalHtml = pesticideItemsTitleHtml;
     finalHtml += "<section class='row'>";
