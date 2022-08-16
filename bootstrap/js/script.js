@@ -49,7 +49,7 @@ $(function () {
       classes += " list-group-item active";
       document.querySelector("#navPesticideButton").className = classes;
     }
-  }
+  };
 
   document.addEventListener("DOMContentLoaded", function (event) {
     showLoading("#main-content");
@@ -84,6 +84,11 @@ $(function () {
     );
     window.history.pushState({}, "", "/index");
     setPathName = window.location.pathname;
+  };
+
+  it.loadPesticideItemsForSearchEngine = function () {
+    $ajaxUtils.sendGetRequest(pesticideItemUrl, it.searchEngine);
+    return false;
   };
 
   function buildAndShowCategoriesHTML(categories) {
@@ -132,21 +137,6 @@ $(function () {
     window.history.pushState({}, "", "/items");
     setPathName = window.location.pathname;
   }
-
-  window.addEventListener('popstate', () => {
-    if (setPathName === "/categories") {
-      if(document.getElementById('category').onclick === null) {
-        console.log("executed");
-      };
-      it.loadMainPage();
-      
-    }
-    if (setPathName === "/items") {
-      pesticideItemUrl =
-            "https://irem-tarim-default-rtdb.firebaseio.com/Category-items-{{category}}.json";
-          it.loadPesticideCategories();     
-    }
-  })
 
   function buildCategoriesViewHtml(
     categories,
@@ -205,6 +195,112 @@ $(function () {
       finalHtml += html;
     }
     finalHtml += "</section>";
+    return finalHtml;
+  }
+
+  window.addEventListener("popstate", () => {
+    if (setPathName === "/categories") {
+      if (document.getElementById("category").onclick === null) {
+      }
+      it.loadMainPage();
+    }
+    if (setPathName === "/items") {
+      pesticideItemUrl =
+        "https://irem-tarim-default-rtdb.firebaseio.com/Category-items-{{category}}.json";
+      it.loadPesticideCategories();
+    }
+  });
+
+  it.searchEngine = function (items) {
+    var score = 0;
+    var founded = [];
+    var searchVal = document.getElementById("searchVal").value;
+    for (var i = 0; i < items.length; i++) {
+      for (var j = 0; j < items[i].name.length; j++) {
+        if (searchVal.indexOf(items[i].name[j]) != -1) {
+          score++;
+        }
+      }
+      if (items[i].name == searchVal) {
+        founded.push(items[i].name);
+      } else if (items[i].name.indexOf(searchVal) != -1) {
+        founded.push(items[i].name);
+      } else if (items[i].name.length * 0.5 <= score) {
+        founded.push(items[i].name);
+      }
+      score = 0;
+    }
+    if (founded.length == 0) {
+      founded.push("Arama sonucu bulunamadı.");
+    }
+    $ajaxUtils.sendGetRequest(
+      pesticideItemsTitleHtml,
+      function (pesticideItemsTitleHtml) {
+        $ajaxUtils.sendGetRequest(
+          pesticideItemHtml,
+          function (pesticideItemHtml) {
+            var pesticdeItemsViewHtml = buildPesticideItemsAfterSearchViewHtml(
+              items,
+              founded,
+              pesticideItemsTitleHtml,
+              pesticideItemHtml
+            );
+            insertHtml("#main-content", pesticdeItemsViewHtml);
+          },
+          false
+        );
+      },
+      false
+    );
+  };
+
+  function buildPesticideItemsAfterSearchViewHtml(
+    categoryPesticideItems,
+    founded,
+    pesticideItemsTitleHtml,
+    pesticideItemHtml
+  ) {
+    pesticideItemsTitleHtml = insertProperty(
+      pesticideItemsTitleHtml,
+      "category_name",
+      categoryPesticideItems[0]["category_name"]
+    );
+    pesticideItemsTitleHtml = insertProperty(
+      pesticideItemsTitleHtml,
+      "category",
+      categoryPesticideItems[0]["category"]
+    );
+    pesticideItemsTitleHtml = insertProperty(
+      pesticideItemsTitleHtml,
+      "short_name",
+      categoryPesticideItems[0]["short_name"]
+    );
+    var finalHtml = pesticideItemsTitleHtml;
+    if (founded[0] == "Arama sonucu bulunamadı.") {
+      finalHtml += "<h5 class='text-center'>Aradığınız ürün bulunamadı.</h5>";
+    }
+    else {
+      finalHtml += "<section class='row'>";
+    for (var i = 0; i < categoryPesticideItems.length; i++) {
+      for (var j = 0; j < founded.length; j++) {
+        if (categoryPesticideItems[i]["name"] == founded[j]) {
+          var html = pesticideItemHtml;
+          var name = "" + categoryPesticideItems[i]["name"];
+          var short_name = categoryPesticideItems[i]["short_name"];
+          var category_name = categoryPesticideItems[i]["category_name"];
+          var description = categoryPesticideItems[i]["description"];
+          var category = categoryPesticideItems[i]["category"];
+          html = insertProperty(html, "name", name);
+          html = insertProperty(html, "short_name", short_name);
+          html = insertProperty(html, "category_name", category_name);
+          html = insertProperty(html, "description", description);
+          html = insertProperty(html, "category", category);
+          finalHtml += html;
+        }
+    }
+  }
+    finalHtml += "</section>";
+    }   
     return finalHtml;
   }
 

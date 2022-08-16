@@ -220,6 +220,20 @@ header {
     box-shadow: 0 1px 5px 1px #cccccc;
 }
 
+.btn {
+    line-height: 1;
+}
+
+.btn-outline-success {
+    color: #cccccc;
+    border-color: #cccccc; 
+} 
+
+.btn-outline-success:hover {    
+    background-color: #cccccc;
+    color: #000;
+} 
+
 /* END PESTICIDES PAGE */
 
 /* SINGLE CATEGORY PESTICIDES PAGE */
@@ -239,6 +253,13 @@ header {
 .row>.pesticide-item-tile {
     margin: 0 auto 15px;
     width: auto;
+}
+
+form.d-flex {
+    width: 300px;
+    margin-left: auto;
+    margin-bottom: 15px;
+    height: 30px;
 }
 
 /* END SINGLE CATEGORY PESTICIDES PAGE */
@@ -351,6 +372,17 @@ header {
     }
 
     /* End Home Page */
+
+    /* Single Category Pesticides Page */
+
+    form.d-flex {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    height: 30px;
+}
+    /* End single Category Pesticides Page */
 }
 
 /************ Super small devices only ************/
@@ -408,4 +440,15 @@ header {
     }
 
     /* End Home Page */
+
+     /* Single Category Pesticides Page */
+
+    form.d-flex {
+        width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 15px;
+        height: 30px;
+    }
+     /* End single Category Pesticides Page */
 }
