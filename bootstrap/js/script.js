@@ -20,6 +20,9 @@ $(function () {
   var pesticideItemsTitleHtml =
     "snippets/single-category-pesticides-title-snippet.html";
   var pesticideItemHtml = "snippets/single-category-pesticides-snippet.html";
+  var postsCarouselHtml = "snippets/posts-carousel-snippet.html";
+  var postsHtml = "snippets/posts-snippet.html";
+  var postsUrl = "https://irem-tarim-default-rtdb.firebaseio.com/Posts.json";
 
   var insertHtml = function (selector, html) {
     var targetElem = document.querySelector(selector);
@@ -91,6 +94,14 @@ $(function () {
     return false;
   };
 
+  it.loadPosts = function () {
+    showLoading("#main-content");
+    $('.carousel').carousel();
+    $ajaxUtils.sendGetRequest(postsUrl, buildAndShowPostsHTML);
+    window.history.pushState({}, "", "/posts");
+    setPathName = window.location.pathname;
+  }
+
   function buildAndShowCategoriesHTML(categories) {
     $ajaxUtils.sendGetRequest(
       categoriesTitleHtml,
@@ -135,6 +146,21 @@ $(function () {
       false
     );
     window.history.pushState({}, "", "/items");
+    setPathName = window.location.pathname;
+  }
+
+  function buildAndShowPostsHTML(posts) {
+    $ajaxUtils.sendGetRequest(postsHtml, function (postsHtml) {
+      $ajaxUtils.sendGetRequest(postsCarouselHtml, function (postsCarouselHtml) {
+        var postsViewHtml = buildPostsViewHtml(
+          posts,
+          postsCarouselHtml,
+          postsHtml
+        );
+        insertHtml("#main-content", postsViewHtml);
+      }, false);
+    }, false);
+    window.history.pushState({}, "", "/posts");
     setPathName = window.location.pathname;
   }
 
@@ -192,6 +218,24 @@ $(function () {
       html = insertProperty(html, "category_name", category_name);
       html = insertProperty(html, "description", description);
       html = insertProperty(html, "category", category);
+      finalHtml += html;
+    }
+    finalHtml += "</section>";
+    return finalHtml;
+  }
+
+  function buildPostsViewHtml(posts, postCarouselHtml, postsHtml) {
+    var finalHtml = postCarouselHtml;
+
+    finalHtml += "<section class='row'>";
+    for(var i = 0; i < posts.length; i++) {
+      var html = postsHtml;  
+      var short_name = posts[i]["short_name"];
+      var header = posts[i]["header"];
+      var content = posts[i]["content"];
+      html = insertProperty(html, "short_name", short_name);  
+      html = insertProperty(html, "header", header);
+      html = insertProperty(html, "content", content);
       finalHtml += html;
     }
     finalHtml += "</section>";
