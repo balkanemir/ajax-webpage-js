@@ -226,19 +226,80 @@ $(function () {
 
   function buildPostsViewHtml(posts, postCarouselHtml, postsHtml) {
     var finalHtml = postCarouselHtml;
-
     finalHtml += "<section class='row'>";
     for(var i = 0; i < posts.length; i++) {
+      var wordcount = 0;
       var html = postsHtml;  
       var short_name = posts[i]["short_name"];
       var header = posts[i]["header"];
       var content = posts[i]["content"];
+      var briefContent = "";
+      for(var j = 0; j < content.length; j++) {
+        wordcount++;
+        briefContent += content[j];
+        console.log(wordcount == 125);
+        if (wordcount == 500) {
+          briefContent += "... <a href='#' style='color: blue;'>devamını oku >></a>";
+          break;
+        }
+      }
       html = insertProperty(html, "short_name", short_name);  
       html = insertProperty(html, "header", header);
-      html = insertProperty(html, "content", content);
+      html = insertProperty(html, "content", briefContent);
+      html = insertProperty(html, "modal_content", content);
       finalHtml += html;
     }
     finalHtml += "</section>";
+    return finalHtml;
+  }
+
+  function buildPesticideItemsAfterSearchViewHtml(
+    categoryPesticideItems,
+    founded,
+    pesticideItemsTitleHtml,
+    pesticideItemHtml
+  ) {
+    pesticideItemsTitleHtml = insertProperty(
+      pesticideItemsTitleHtml,
+      "category_name",
+      categoryPesticideItems[0]["category_name"]
+    );
+    pesticideItemsTitleHtml = insertProperty(
+      pesticideItemsTitleHtml,
+      "category",
+      categoryPesticideItems[0]["category"]
+    );
+    pesticideItemsTitleHtml = insertProperty(
+      pesticideItemsTitleHtml,
+      "short_name",
+      categoryPesticideItems[0]["short_name"]
+    );
+    var finalHtml = pesticideItemsTitleHtml;
+    if (founded[0] == "Arama sonucu bulunamadı.") {
+      finalHtml += "<h5 class='text-center'>Aradığınız ürün bulunamadı.</h5>";
+    }
+    else {
+      finalHtml += "<section class='row'>";
+    for (var i = 0; i < categoryPesticideItems.length; i++) {
+      for (var j = 0; j < founded.length; j++) {
+        if (categoryPesticideItems[i]["name"] == founded[j]) {
+          var html = pesticideItemHtml;
+          var name = "" + categoryPesticideItems[i]["name"];
+          var short_name = categoryPesticideItems[i]["short_name"];
+          var category_name = categoryPesticideItems[i]["category_name"];
+          var description = categoryPesticideItems[i]["description"];
+          var category = categoryPesticideItems[i]["category"];
+          html = insertProperty(html, "name", name);
+          html = insertProperty(html, "short_name", short_name);
+          html = insertProperty(html, "category_name", category_name);
+          html = insertProperty(html, "description", description);
+          html = insertProperty(html, "category", category);
+          finalHtml += html;
+        }
+    }
+  }
+    finalHtml += "</section>";
+    }   
     return finalHtml;
   }
 
@@ -297,56 +358,6 @@ $(function () {
       false
     );
   };
-
-  function buildPesticideItemsAfterSearchViewHtml(
-    categoryPesticideItems,
-    founded,
-    pesticideItemsTitleHtml,
-    pesticideItemHtml
-  ) {
-    pesticideItemsTitleHtml = insertProperty(
-      pesticideItemsTitleHtml,
-      "category_name",
-      categoryPesticideItems[0]["category_name"]
-    );
-    pesticideItemsTitleHtml = insertProperty(
-      pesticideItemsTitleHtml,
-      "category",
-      categoryPesticideItems[0]["category"]
-    );
-    pesticideItemsTitleHtml = insertProperty(
-      pesticideItemsTitleHtml,
-      "short_name",
-      categoryPesticideItems[0]["short_name"]
-    );
-    var finalHtml = pesticideItemsTitleHtml;
-    if (founded[0] == "Arama sonucu bulunamadı.") {
-      finalHtml += "<h5 class='text-center'>Aradığınız ürün bulunamadı.</h5>";
-    }
-    else {
-      finalHtml += "<section class='row'>";
-    for (var i = 0; i < categoryPesticideItems.length; i++) {
-      for (var j = 0; j < founded.length; j++) {
-        if (categoryPesticideItems[i]["name"] == founded[j]) {
-          var html = pesticideItemHtml;
-          var name = "" + categoryPesticideItems[i]["name"];
-          var short_name = categoryPesticideItems[i]["short_name"];
-          var category_name = categoryPesticideItems[i]["category_name"];
-          var description = categoryPesticideItems[i]["description"];
-          var category = categoryPesticideItems[i]["category"];
-          html = insertProperty(html, "name", name);
-          html = insertProperty(html, "short_name", short_name);
-          html = insertProperty(html, "category_name", category_name);
-          html = insertProperty(html, "description", description);
-          html = insertProperty(html, "category", category);
-          finalHtml += html;
-        }
-    }
-  }
-    finalHtml += "</section>";
-    }   
-    return finalHtml;
-  }
 
   global.$it = it;
 })(window);

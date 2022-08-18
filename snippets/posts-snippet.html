@@ -1,11 +1,40 @@
 <div class="col-lg-6 col-sm-12">
-    <a href="#" onclick="">
-        <div id="post-tile">
-            <div class="image-box">
-                <img src="/posts/{{short_name}}.jpg" alt="post image">
-            </div> 
-            <h5>{{header}}</h5>
-            <p>{{content}}</p>
+  <a href="#" onclick="">
+    <div id="post-tile" data-bs-toggle="modal" data-bs-target="#exampleModal-{{short_name}}">
+      <div class="image-box">
+        <img src="/posts/{{short_name}}.jpg" alt="post image">
+      </div>
+      <h5>{{header}}</h5>
+      <p>{{content}}</p>
+    </div>
+  </a>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal-{{short_name}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>{{header}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="">
+              <div id="post-modal-tile" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <div class="image-modal-box">
+                  <img src="/posts/{{short_name}}.jpg" alt="post image">
+                </div>
+                <p>{{modal_content}}</p>
+              </div>
+            </div>
+
+
+          </div>
         </div>
-    </a>
+      </div>
+
+    </div>
+  </div>
 </div>
