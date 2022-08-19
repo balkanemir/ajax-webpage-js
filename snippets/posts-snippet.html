@@ -1,8 +1,8 @@
 <div class="col-lg-6 col-sm-12">
-  <a href="#" onclick="">
+  <a href="#">
     <div id="post-tile" data-bs-toggle="modal" data-bs-target="#exampleModal-{{short_name}}">
       <div class="image-box">
-        <img src="/posts/{{short_name}}.jpg" alt="post image">
+        {{post_component}}
       </div>
       <h5>{{header}}</h5>
       <p>{{content}}</p>
@@ -24,7 +24,7 @@
             <div class="">
               <div id="post-modal-tile" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <div class="image-modal-box">
-                  <img src="/posts/{{short_name}}.jpg" alt="post image">
+                  {{post_component}}
                 </div>
                 <p>{{modal_content}}</p>
               </div>

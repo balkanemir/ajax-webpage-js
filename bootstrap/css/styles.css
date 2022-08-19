@@ -142,12 +142,14 @@ header {
     border: 2px solid #3f0c1f;
     overflow: hidden;
     border-radius: 5px;
+    transition: all 0.5s;
 }
 
 #pesticide-tile:hover,
 #seed-tile:hover,
 #map-tile:hover {
     box-shadow: 0 0 5px 1px #cccccc;
+    transform: scale(1.04);
 }
 
 #pesticide-tile {
@@ -331,8 +333,12 @@ a:hover {
     text-align: center;
 }
 
+.modal-header {
+    background: #a90015;
+}
+
 .modal-header h5 {
-    color: #000;
+    color: #fff;
 }
 
 #post-modal-tile p {

@@ -233,15 +233,23 @@ $(function () {
       var short_name = posts[i]["short_name"];
       var header = posts[i]["header"];
       var content = posts[i]["content"];
+      var type = posts[i]["type"];
       var briefContent = "";
       for(var j = 0; j < content.length; j++) {
         wordcount++;
         briefContent += content[j];
-        console.log(wordcount == 125);
         if (wordcount == 500) {
           briefContent += "... <a href='#' style='color: blue;'>devamını oku >></a>";
           break;
         }
+      }
+      if(type == "img") {
+        var post_component = "<img id='post-img' style='float: center;' src='/posts/{{short_name}}.jpg' alt='post image'>";
+        html = insertProperty(html, "post_component", post_component);
+      }
+      if(type == "mov") {
+        var post_component = "<video id='post-video' width='auto' height='280' controls><source src='/posts/{{short_name}}.mov' type='video/mp4'></video>";
+        html = insertProperty(html, "post_component", post_component);
       }
       html = insertProperty(html, "short_name", short_name);  
       html = insertProperty(html, "header", header);
