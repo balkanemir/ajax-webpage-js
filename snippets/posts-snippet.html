@@ -1,11 +1,11 @@
 <div class="col-lg-6 col-sm-12">
   <a href="#">
-    <div id="post-tile" data-bs-toggle="modal" data-bs-target="#exampleModal-{{short_name}}">
-      <div class="image-box">
+    <div id="post-tile" {{post_tile_style}} data-bs-toggle="modal" data-bs-target="#exampleModal-{{short_name}}">
+      <div class="image-box" {{image_box_style}}>
         {{post_component}}
       </div>
-      <h5>{{header}}</h5>
-      <p>{{content}}</p>
+      <h5 {{h5_style}}>{{header}}</h5>
+      <p {{content_style}}>{{content}}</p>
     </div>
   </a>
 </div>

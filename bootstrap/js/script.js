@@ -244,12 +244,30 @@ $(function () {
         }
       }
       if(type == "img") {
-        var post_component = "<img id='post-img' style='float: center;' src='/posts/{{short_name}}.jpg' alt='post image'>";
+        var post_component = "<img id='post-img' src='/posts/{{short_name}}.jpg' alt='post image'>";
         html = insertProperty(html, "post_component", post_component);
+        if(content == "") {
+          var image_box_style = "style='width: 100%; height: 100%; margin: 0;'";
+          var display_none = "style='display: none;'";
+          var post_tile_style = "style='padding-top: 0;'";
+          html = insertProperty(html, "image_box_style", image_box_style);
+          html = insertProperty(html, "h5_style", display_none);
+          html = insertProperty(html, "content_style", display_none);
+          html = insertProperty(html, "post_tile_style", post_tile_style);
+        }
       }
       if(type == "mov") {
         var post_component = "<video id='post-video' width='auto' height='280' controls><source src='/posts/{{short_name}}.mov' type='video/mp4'></video>";
         html = insertProperty(html, "post_component", post_component);
+        if(content == "") {
+          var image_box_style = "style='width: 100%; height: 100%; margin: 0;'";
+          var display_none = "style='display: none;'";
+          var post_tile_style = "style='padding-top: 0;'";
+          html = insertProperty(html, "image_box_style", image_box_style);
+          html = insertProperty(html, "h5_style", display_none);
+          html = insertProperty(html, "content_style", display_none);
+          html = insertProperty(html, "post_tile_style", post_tile_style);
+        }
       }
       html = insertProperty(html, "short_name", short_name);  
       html = insertProperty(html, "header", header);
