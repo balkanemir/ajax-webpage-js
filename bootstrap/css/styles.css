@@ -359,6 +359,33 @@ a:hover {
 
 /* END POST PAGE MODAL */
 
+/* ABOUT PAGE */
+.staff-tile {
+    position: relative;
+    height: auto;
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+    color: #000;
+    background-color: #cccccc;
+    border-radius: 5px;
+}
+
+.staff-tile p {
+    font-size: 14px;
+}
+
+.staff-tile img {
+    margin-right: 10px;
+    float: left;
+    width: 200px;
+    height: 270px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+/* END ABOUT PAGE */
+
 /************ Large devices only ************/
 @media (min-width: 1200px) {
 
@@ -525,6 +552,17 @@ a:hover {
     }
 
     /* End Post Page */
+
+    /* About Page */
+    .staff-tile {
+        text-align: center;
+    }
+
+    .staff-tile img {
+        float: none;
+    }
+
+    /* End About Page */
 }
 
 /************ Super small devices only ************/
@@ -631,4 +669,15 @@ a:hover {
     }
 
     /* End Post Page */
+
+    /* About Page */
+    .staff-tile {
+        text-align: center;
+    }
+
+    .staff-tile img {
+        float: none;
+    }
+
+    /* End About Page */
 }

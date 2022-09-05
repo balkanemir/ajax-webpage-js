@@ -23,7 +23,10 @@ $(function () {
   var postsCarouselHtml = "snippets/posts-carousel-snippet.html";
   var postsHtml = "snippets/posts-snippet.html";
   var postsUrl = "https://irem-tarim-default-rtdb.firebaseio.com/Posts.json";
+  var aboutHtml = "snippets/about-snippet.html";
+  var aboutUrl = "https://irem-tarim-default-rtdb.firebaseio.com/About.json";
 
+  //PROPERTIES
   var insertHtml = function (selector, html) {
     var targetElem = document.querySelector(selector);
     targetElem.innerHTML = html;
@@ -53,7 +56,9 @@ $(function () {
       document.querySelector("#navPesticideButton").className = classes;
     }
   };
+  //END PROPERTIES
 
+  //LOADS
   document.addEventListener("DOMContentLoaded", function (event) {
     showLoading("#main-content");
     $ajaxUtils.sendGetRequest(
@@ -102,6 +107,16 @@ $(function () {
     setPathName = window.location.pathname;
   }
 
+  it.loadAbout = function () {
+    showLoading("#main-content");
+    $ajaxUtils.sendGetRequest(aboutUrl, buildAndShowAboutHTML);
+    window.history.pushState({}, "", "/about");
+    setPathName = window.location.pathname;
+  }
+  //END LOADS
+
+
+  //BUILD AND SHOW HTMLS
   function buildAndShowCategoriesHTML(categories) {
     $ajaxUtils.sendGetRequest(
       categoriesTitleHtml,
@@ -164,6 +179,18 @@ $(function () {
     setPathName = window.location.pathname;
   }
 
+  function buildAndShowAboutHTML(people) {
+    $ajaxUtils.sendGetRequest(aboutHtml, function(aboutHtml) {
+      var aboutViewHtml = buildAboutViewHTML(
+        people,
+        aboutHtml
+      );
+      insertHtml("#main-content", aboutViewHtml);
+    }, false);
+  }
+  //END BUILD AND SHOW HTMLS
+
+  //BUILD VIEW HTML
   function buildCategoriesViewHtml(
     categories,
     categoriesTitleHtml,
@@ -329,6 +356,24 @@ $(function () {
     return finalHtml;
   }
 
+  function buildAboutViewHTML(people, aboutHtml) {
+    var finalHtml = "<section class='row'>";
+    for(var i = 0; i < people.length; i++) {
+      var html = aboutHtml;
+      var name = "" + people[i]["name"];
+      var surname = people[i]["surname"];
+      var profile = people[i]["profile"];
+      html = insertProperty(html, "name", name);
+      html = insertProperty(html, "surname", surname);
+      html = insertProperty(html, "profile", profile);
+      finalHtml += html;
+    }
+    finalHtml += "</section>";
+    return finalHtml;
+  }
+  // END BUILD VIEW HTML
+
+  // POPSTATE
   window.addEventListener("popstate", () => {
     if (setPathName === "/categories") {
       if (document.getElementById("category").onclick === null) {
@@ -340,8 +385,18 @@ $(function () {
         "https://irem-tarim-default-rtdb.firebaseio.com/Category-items-{{category}}.json";
       it.loadPesticideCategories();
     }
-  });
 
+    if (setPathName === "/posts") {
+      it.loadMainPage();
+    }
+
+    if (setPathName === "/about") {
+      it.loadMainPage();
+    }
+  });
+  // END POPSTATE
+
+  // SEARCH ENGINE
   it.searchEngine = function (items) {
     var score = 0;
     var founded = [];
@@ -384,6 +439,7 @@ $(function () {
       false
     );
   };
+  //END SEARCH ENGINE
 
   global.$it = it;
 })(window);
