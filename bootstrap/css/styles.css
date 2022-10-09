@@ -12,7 +12,7 @@ header {
 
 #logo-img {
     background: #a90015;
-    width: 315px;
+    width: 215px;
     height: 134px;
     margin: 10px 15px 10px 0px;
     border-radius: 5px;
@@ -130,6 +130,7 @@ header {
     box-shadow: 0 0 5px #000;
     margin-top: 20px;
     border-radius: 5px;
+    overflow: hidden;
 }
 
 #pesticide-tile,
@@ -152,14 +153,16 @@ header {
     transform: scale(1.04);
 }
 
-#pesticide-tile {
-    background: url("../images/pesticide.jpg") no-repeat;
+#pesticide-tile img {
     background-position: center;
+    width: 100%;
+    height: 250px;
 }
 
-#seed-tile {
-    background: url("../images/seed.jpg") no-repeat;
+#seed-tile img {
     background-position: center;
+    width: 100%;
+    height: auto;
 }
 
 #pesticide-tile span,
@@ -204,6 +207,12 @@ header {
     height: 200px;
     margin: 0 auto 15px;
     border-radius: 5px;
+    transition: all 0.5s;
+}
+
+.category-tile:hover {
+    box-shadow: 0 0 5px 3px #cccccc;
+    transform: scale(1.04);
 }
 
 .category-tile span {
@@ -269,11 +278,16 @@ form.d-flex {
 
 /* POSTS PAGE */
 .carousel {
-    height: 500px;
+    height: auto;
     margin-top: 15px;
     overflow: hidden;
     border-radius: 5px;
     box-shadow: 0 0 5px 1px #000;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
 }
 
 .carousel-caption {
@@ -285,7 +299,7 @@ form.d-flex {
 #post-tile {
     margin-top: 30px;
     width: 100%;
-    height: 300px;
+    height: 100px;
     background: #cccccc;
     border-radius: 5px;
     border: 1px solid #000;
@@ -293,7 +307,7 @@ form.d-flex {
 }
 
 #post-tile:hover {
-    box-shadow: 0 0 5px 1px #cccccc;
+    box-shadow: 0 0 5px 3px #cccccc;
     transform: scale(1.04);
 }
 
@@ -355,6 +369,13 @@ a:hover {
 
 .image-modal-box img {
     border-radius: 5px;
+    width: 40%;
+    height: 40%;
+}
+
+.image-box img {
+    width: 100%;
+    height: 100%;
 }
 
 /* END POST PAGE MODAL */
@@ -364,24 +385,33 @@ a:hover {
     position: relative;
     height: auto;
     width: 100%;
-    margin-top: 15px;
-    padding: 10px;
+    margin-top: 125px;
+    padding: 100px 10px 10px 10px;
     color: #000;
     background-color: #cccccc;
     border-radius: 5px;
+    justify-content: center;
+    display: flex;
 }
 
-.staff-tile p {
+.staff-content {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.staff-content p {
     font-size: 14px;
+    text-align: center;
 }
 
 .staff-tile img {
-    margin-right: 10px;
-    float: left;
+    bottom: 80%;
+    position: absolute;
     width: 200px;
-    height: 270px;
+    height: 200px;
     border: 1px solid black;
-    border-radius: 5px;
+    border-radius: 100%;
+    text-align: center;
 }
 
 /* END ABOUT PAGE */
@@ -391,7 +421,7 @@ a:hover {
 
     /* Home Page */
     .container .jumbotron {
-        background: url("../images/iremtarım.png") no-repeat;
+        text-align: center;
         height: 675px;
         margin-bottom: 20px;
         border-radius: 5px;
@@ -416,7 +446,7 @@ a:hover {
 
     /* End Single Category Pesticides Page */
 
-    /* Posts Page */
+    /* Posts Page */   
     .carousel-caption {
         margin-bottom: 600px;
         color: #000;
@@ -444,7 +474,7 @@ a:hover {
 
     /* Home Page */
     .container .jumbotron {
-        background: url("../images/iremtarım.png") no-repeat;
+        background: #f2f5fa;
         height: 558px;
         margin-bottom: 20px;
     }
@@ -457,7 +487,25 @@ a:hover {
         color: #000;
     }
 
+    .image-modal-box img {
+        border-radius: 5px;
+        width: 60%;
+        height: 60%;
+    }
+
     /* End Post Page */
+
+    /* About Page */
+    .staff-tile img {
+        bottom: 85%;
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        border: 1px solid black;
+        border-radius: 100%;
+        text-align: center;
+    }    
+    /* End About Page */
 }
 
 /************ Small devices only ************/
@@ -466,7 +514,7 @@ a:hover {
     /* Header */
     #logo-img {
         background: #a90015;
-        width: 215px;
+        width: 115px;
         height: 84px;
         margin: 10px 15px 10px 0px;
         border-radius: 500px;
@@ -481,7 +529,7 @@ a:hover {
 
     /* Home Page */
     .container .jumbotron {
-        background: url("../images/iremtarım.png") no-repeat;
+        background: #f2f5fa;
         height: 432px;
         margin-bottom: 20px;
         border-radius: 5px;
@@ -495,8 +543,26 @@ a:hover {
         color: #000;
     }
 
+    .image-modal-box img {
+        border-radius: 5px;
+        width: 100%;
+        height: 100%;
+    }
+
     /* End Post Page */
-}
+
+    /* About Page */
+    .staff-tile img {
+        bottom: 85%;
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        border: 1px solid black;
+        border-radius: 100%;
+        text-align: center;
+    }    
+    /* End About Page */
+    }
 
 /************ Extra small devices only ************/
 @media (min-width: 575px) and (max-width: 767px) {
@@ -519,7 +585,7 @@ a:hover {
 
     /* Home Page */
     .container .jumbotron {
-        background: url("../images/iremtarım.png") no-repeat;
+        background: #f2f5fa;
         height: 400px;
         margin-bottom: 20px;
         border-radius: 5px;
@@ -551,17 +617,24 @@ a:hover {
         color: #000;
     }
 
+    .image-modal-box img {
+        border-radius: 5px;
+        width: 70%;
+        height: 70%;
+    }
+
     /* End Post Page */
 
     /* About Page */
-    .staff-tile {
+    .staff-tile img {
+        bottom: 70%;
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        border: 1px solid black;
+        border-radius: 100%;
         text-align: center;
     }
-
-    .staff-tile img {
-        float: none;
-    }
-
     /* End About Page */
 }
 
@@ -607,7 +680,7 @@ a:hover {
 
     /* Home Page */
     .container .jumbotron {
-        background: url("../images/iremtarım.png") no-repeat;
+        background: #f2f5fa;
         margin-bottom: 20px;
         border-radius: 5px;
     }
@@ -655,6 +728,8 @@ a:hover {
         text-align: center;
         padding-top: 10px;
         height: auto;
+        width: auto;
+        display: flex;
     }
 
     .image-box {
@@ -663,20 +738,34 @@ a:hover {
         float: none;
     }
 
+    .image-modal-box img {
+        border-radius: 5px;
+        width: 100%;
+        height: 100%;
+    }
+
     #post-tile:hover {
         box-shadow: 0 0 5px 1px #cccccc;
         transform: scale(1.02);
     }
 
+    .col-xs-2 {
+        flex: 0 0 auto;
+        width: 25%;
+    }
+
     /* End Post Page */
 
     /* About Page */
+
     .staff-tile {
-        text-align: center;
+        margin-top: 100px;
     }
 
     .staff-tile img {
-        float: none;
+        top: -75px;
+        width: 150px;
+        height: 150px;
     }
 
     /* End About Page */

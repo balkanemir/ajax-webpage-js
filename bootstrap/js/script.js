@@ -45,15 +45,18 @@ $(function () {
     return string;
   };
 
-  var switchNavButtonToActive = function () {
-    var classes = document.querySelector("#navHomeButton").className;
-    classes = classes.replace(new RegExp("list-group-item active", "g"), "");
-    document.querySelector("#navHomeButton").className = classes;
-
-    classes = document.querySelector("#navPesticideButton").className;
-    if (classes.indexOf("active") == -1) {
+  var switchNavButtonToActive = function (active_id) {
+    let allButtons = ["#navHomeButton" , "#navPesticideButton", "#navPhotoButton", "#navAboutButton", "#navContactButton"];
+    allButtons = allButtons.filter(item => item !== active_id);
+    for(var i = 0; i < allButtons.length; i++) {
+      var classes = document.querySelector(allButtons[i]).className;
+      classes = classes.replace(new RegExp("list-group-item active", "g"), "");
+      document.querySelector(allButtons[i]).className = classes;
+    }
+    classes = document.querySelector(active_id).className;
+    if (classes.indexOf(active_id) == -1) {
       classes += " list-group-item active";
-      document.querySelector("#navPesticideButton").className = classes;
+      document.querySelector(active_id).className = classes;
     }
   };
   //END PROPERTIES
@@ -87,6 +90,7 @@ $(function () {
       homeHtml,
       function (homeHtml) {
         insertHtml("#main-content", homeHtml);
+        switchNavButtonToActive("#navHomeButton");
       },
       false
     );
@@ -130,7 +134,7 @@ $(function () {
               categoryHtml
             );
             insertHtml("#main-content", categoriesViewHtml);
-            switchNavButtonToActive();
+            switchNavButtonToActive("#navPesticideButton");
           },
           false
         );
@@ -173,6 +177,7 @@ $(function () {
           postsHtml
         );
         insertHtml("#main-content", postsViewHtml);
+        switchNavButtonToActive("#navPhotoButton");
       }, false);
     }, false);
     window.history.pushState({}, "", "/posts");
@@ -186,6 +191,7 @@ $(function () {
         aboutHtml
       );
       insertHtml("#main-content", aboutViewHtml);
+      switchNavButtonToActive("#navAboutButton");
     }, false);
   }
   //END BUILD AND SHOW HTMLS
@@ -271,7 +277,7 @@ $(function () {
         }
       }
       if(type == "img") {
-        var post_component = "<img id='post-img' src='/posts/{{short_name}}.jpg' alt='post image'>";
+        var post_component = "<img id='post-img' src='/posts/{{short_name}}.jpeg' alt='post image'>";
         html = insertProperty(html, "post_component", post_component);
         if(content == "") {
           var image_box_style = "style='width: 100%; height: 100%; margin: 0;'";
@@ -386,9 +392,9 @@ $(function () {
       it.loadPesticideCategories();
     }
 
-    if (setPathName === "/posts") {
-      it.loadMainPage();
-    }
+    // if (setPathName === "/posts") {
+    //   it.loadMainPage();
+    // }
 
     if (setPathName === "/about") {
       it.loadMainPage();
