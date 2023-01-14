@@ -9,7 +9,7 @@ $(function () {
 
 (function (global) {
   var it = {};
-  var setPathName = window.location.pathname;
+  var setpathname = window.location.pathname;
   var homeHtml = "snippets/home-snippet.html";
   var allCategoriesUrl =
     "https://irem-tarim-default-rtdb.firebaseio.com/Categories.json";
@@ -46,7 +46,7 @@ $(function () {
   };
 
   var switchNavButtonToActive = function (active_id) {
-    let allButtons = ["#navHomeButton" , "#navPesticideButton", "#navPhotoButton", "#navAboutButton", "#navContactButton"];
+    let allButtons = ["#navHomeButton" , "#navPesticideButton", "#navPhotoButton", "#navAboutButton"];
     allButtons = allButtons.filter(item => item !== active_id);
     for(var i = 0; i < allButtons.length; i++) {
       var classes = document.querySelector(allButtons[i]).className;
@@ -95,7 +95,7 @@ $(function () {
       false
     );
     window.history.pushState({}, "", "/index");
-    setPathName = window.location.pathname;
+    setpathname = window.location.pathname;
   };
 
   it.loadPesticideItemsForSearchEngine = function () {
@@ -108,14 +108,14 @@ $(function () {
     $('.carousel').carousel();
     $ajaxUtils.sendGetRequest(postsUrl, buildAndShowPostsHTML);
     window.history.pushState({}, "", "/posts");
-    setPathName = window.location.pathname;
+    setpathname = window.location.pathname;
   }
 
   it.loadAbout = function () {
     showLoading("#main-content");
     $ajaxUtils.sendGetRequest(aboutUrl, buildAndShowAboutHTML);
     window.history.pushState({}, "", "/about");
-    setPathName = window.location.pathname;
+    setpathname = window.location.pathname;
   }
   //END LOADS
 
@@ -142,7 +142,7 @@ $(function () {
       false
     );
     window.history.pushState({}, "", "/categories");
-    setPathName = window.location.pathname;
+    setpathname = window.location.pathname;
   }
 
   function buildAndShowPesticideItemsHTML(categoryPesticideItems) {
@@ -165,7 +165,7 @@ $(function () {
       false
     );
     window.history.pushState({}, "", "/items");
-    setPathName = window.location.pathname;
+    setpathname = window.location.pathname;
   }
 
   function buildAndShowPostsHTML(posts) {
@@ -181,7 +181,7 @@ $(function () {
       }, false);
     }, false);
     window.history.pushState({}, "", "/posts");
-    setPathName = window.location.pathname;
+    setpathname = window.location.pathname;
   }
 
   function buildAndShowAboutHTML(people) {
@@ -207,10 +207,8 @@ $(function () {
 
     for (var i = 0; i < categories.length; i++) {
       var html = categoryHtml;
-      var name = "" + categories[i]["name"];
-      var short_name = categories[i]["short_name"];
-      html = insertProperty(html, "name", name);
-      html = insertProperty(html, "short_name", short_name);
+      var NAME = "" + categories[i]["NAME"];
+      html = insertProperty(html, "NAME", NAME);
       finalHtml += html;
     }
     finalHtml += "</section>";
@@ -224,33 +222,17 @@ $(function () {
   ) {
     pesticideItemsTitleHtml = insertProperty(
       pesticideItemsTitleHtml,
-      "category_name",
-      categoryPesticideItems[0]["category_name"]
-    );
-    pesticideItemsTitleHtml = insertProperty(
-      pesticideItemsTitleHtml,
-      "category",
-      categoryPesticideItems[0]["category"]
-    );
-    pesticideItemsTitleHtml = insertProperty(
-      pesticideItemsTitleHtml,
-      "short_name",
-      categoryPesticideItems[0]["short_name"]
+      "TYPE",
+      categoryPesticideItems[0][0]["TYPE"]
     );
     var finalHtml = pesticideItemsTitleHtml;
     finalHtml += "<section class='row'>";
-    for (var i = 0; i < categoryPesticideItems.length; i++) {
+    for (var i = 0; i < categoryPesticideItems[0].length; i++) {
       var html = pesticideItemHtml;
-      var name = "" + categoryPesticideItems[i]["name"];
-      var short_name = categoryPesticideItems[i]["short_name"];
-      var category_name = categoryPesticideItems[i]["category_name"];
-      var description = categoryPesticideItems[i]["description"];
-      var category = categoryPesticideItems[i]["category"];
-      html = insertProperty(html, "name", name);
-      html = insertProperty(html, "short_name", short_name);
-      html = insertProperty(html, "category_name", category_name);
-      html = insertProperty(html, "description", description);
-      html = insertProperty(html, "category", category);
+      var NAME = "" + categoryPesticideItems[0][i]["NAME"];
+      var TYPE = categoryPesticideItems[0][i]["TYPE"];
+      html = insertProperty(html, "NAME", NAME.toUpperCase());
+      html = insertProperty(html, "TYPE", TYPE);
       finalHtml += html;
     }
     finalHtml += "</section>";
@@ -320,18 +302,8 @@ $(function () {
   ) {
     pesticideItemsTitleHtml = insertProperty(
       pesticideItemsTitleHtml,
-      "category_name",
-      categoryPesticideItems[0]["category_name"]
-    );
-    pesticideItemsTitleHtml = insertProperty(
-      pesticideItemsTitleHtml,
-      "category",
-      categoryPesticideItems[0]["category"]
-    );
-    pesticideItemsTitleHtml = insertProperty(
-      pesticideItemsTitleHtml,
-      "short_name",
-      categoryPesticideItems[0]["short_name"]
+      "TYPE",
+      categoryPesticideItems[0][0]["TYPE"]
     );
     var finalHtml = pesticideItemsTitleHtml;
     if (founded[0] == "Arama sonucu bulunamadı.") {
@@ -339,20 +311,14 @@ $(function () {
     }
     else {
       finalHtml += "<section class='row'>";
-    for (var i = 0; i < categoryPesticideItems.length; i++) {
+    for (var i = 0; i < categoryPesticideItems[0].length; i++) {
       for (var j = 0; j < founded.length; j++) {
-        if (categoryPesticideItems[i]["name"] == founded[j]) {
+        if (categoryPesticideItems[0][i]["NAME"] == founded[j]) {
           var html = pesticideItemHtml;
-          var name = "" + categoryPesticideItems[i]["name"];
-          var short_name = categoryPesticideItems[i]["short_name"];
-          var category_name = categoryPesticideItems[i]["category_name"];
-          var description = categoryPesticideItems[i]["description"];
-          var category = categoryPesticideItems[i]["category"];
-          html = insertProperty(html, "name", name);
-          html = insertProperty(html, "short_name", short_name);
-          html = insertProperty(html, "category_name", category_name);
-          html = insertProperty(html, "description", description);
-          html = insertProperty(html, "category", category);
+          var NAME = "" + categoryPesticideItems[0][i]["NAME"];
+          var TYPE = categoryPesticideItems[0][i]["TYPE"];
+          html = insertProperty(html, "NAME", NAME);
+          html = insertProperty(html, "TYPE", TYPE);
           finalHtml += html;
         }
     }
@@ -381,24 +347,24 @@ $(function () {
 
   // POPSTATE
   window.addEventListener("popstate", () => {
-    if (setPathName === "/categories") {
+    if (setpathname === "/categories") {
       if (document.getElementById("category").onclick === null) {
       }
       it.loadMainPage();
     }
-    if (setPathName === "/items") {
+    if (setpathname === "/items") {
       pesticideItemUrl =
         "https://irem-tarim-default-rtdb.firebaseio.com/Category-items-{{category}}.json";
       it.loadPesticideCategories();
     }
 
-    // if (setPathName === "/posts") {
+    // if (setpathname === "/posts") {
     //   it.loadMainPage();
     // }
 
-    if (setPathName === "/about") {
-      it.loadMainPage();
-    }
+    //if (setpathname === "/about") {
+     // it.loadMainPage();
+    //}
   });
   // END POPSTATE
 
@@ -406,19 +372,19 @@ $(function () {
   it.searchEngine = function (items) {
     var score = 0;
     var founded = [];
-    var searchVal = document.getElementById("searchVal").value;
-    for (var i = 0; i < items.length; i++) {
-      for (var j = 0; j < items[i].name.length; j++) {
-        if (searchVal.indexOf(items[i].name[j]) != -1) {
+    var searchVal = document.getElementById("searchVal").value.toUpperCase();
+    for (var i = 0; i < items[0].length; i++) {
+      for (var j = 0; j < items[0][i].NAME.length; j++) {
+        if (searchVal.indexOf(items[0][i].NAME[j]) != -1) {
           score++;
         }
       }
-      if (items[i].name == searchVal) {
-        founded.push(items[i].name);
-      } else if (items[i].name.indexOf(searchVal) != -1) {
-        founded.push(items[i].name);
-      } else if (items[i].name.length * 0.5 <= score) {
-        founded.push(items[i].name);
+      if (items[0][i].NAME == searchVal) {
+        founded.push(items[0][i].NAME);
+      } else if (items[0][i].NAME.indexOf(searchVal) != -1) {
+        founded.push(items[0][i].NAME);
+      } else if (items[0][i].NAME.length * 0.5 <= score) {
+        founded.push(items[0][i].NAME);
       }
       score = 0;
     }
